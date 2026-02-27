@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Navbar from "./Navbar";
-import { Outlet, data } from "react-router";
+import { Outlet } from "react-router";
 
 function Layout() {
   const [data, setdata] = useState<string>("");

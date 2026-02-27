@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Link, Links } from "react-router";
+import { useState } from "react";
+import { Link } from "react-router";
 
 type user_input_props = {
-  setdata: React.Dispatch<React.SetStateAction<string>>;
+  setdata: (value: string) => void;
 };
 export default function Navbar({ setdata }: user_input_props) {
   const [value, setvalue] = useState<string>("");

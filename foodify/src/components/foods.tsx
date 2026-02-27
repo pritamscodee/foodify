@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
@@ -28,18 +28,11 @@ type loadingState = "success" | "loading" | "data not found" | null;
 
 function Foods({ data }: user_input_props) {
   const [getfoods, setfoods] = useState<meals[]>([]);
-  const [emptyinput, setinput] = useState<Boolean>(true);
 
   const [loading, setloading] = useState<loadingState>(null);
 
   useEffect(() => {
     async function fetchingmeals() {
-      if (data.length === 0 || !data) {
-        setinput(true);
-      } else {
-        setinput(false);
-      }
-
       if (getfoods.length === 0) {
         setloading("loading");
       }
