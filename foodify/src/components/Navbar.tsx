@@ -18,16 +18,29 @@ export default function Navbar({ setdata }: user_input_props) {
           <span className="p-4">
             <img className="h-11 w-13" src="/foodie.png" alt="" />
           </span>
-          <nav className="py-5  font-extrabold text-pink-500 text-2xl">Foodify</nav>
+          <nav className="py-5  font-extrabold text-pink-500 text-2xl">
+            Foodify
+          </nav>
         </div>
 
-        <div className="p-4 w-64 ">
-          <ul className="flex  m-2 w-full justify-between">
+        <div className="p-3 w-fit">
+          <ul className="flex m-2 w-full justify-between gap-6">
+            <li className="text-blue-600/100 dark:text-sky-400/100">
+              {" "}
+              Cart-items{" "}
+            </li>
             <Link to="/foods">
               {" "}
-              <li     className=" text-pink-500   ">All-foods</li>{" "}
+              <li className=" text-pink-500   ">All-foods</li>{" "}
             </Link>
-            <li   className="text-blue-600/100 dark:text-sky-400/100"> Call us</li>
+            <li className="text-blue-600/100 dark:text-sky-400/100">
+              {" "}
+              Call us
+            </li>
+            <li className="text-blue-600/100 dark:text-sky-400/100">
+              {" "}
+              Wishlists
+            </li>
           </ul>
         </div>
 
