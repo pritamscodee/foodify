@@ -70,7 +70,7 @@ function Foods({ data }: user_input_props) {
 
       {getfoods && getfoods.length > 0 ? (
         getfoods.map((e, idx) => (
-          <Card key={idx} className="relative mx-auto w-full max-w-sm pt-0">
+          <Card key={idx} className="relative mx-auto w-full max-w-sm pt-0   hover:shadow-xl transition-all duration-300 border bg-lime-500"  >
             <img
               src={e.img}
               alt="Event cover"

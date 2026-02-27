@@ -18,16 +18,16 @@ export default function Navbar({ setdata }: user_input_props) {
           <span className="p-4">
             <img className="h-11 w-13" src="/foodie.png" alt="" />
           </span>
-          <nav className="py-5  font-extrabold text-2xl">Foodify</nav>
+          <nav className="py-5  font-extrabold text-pink-500 text-2xl">Foodify</nav>
         </div>
 
         <div className="p-4 w-64 ">
           <ul className="flex  m-2 w-full justify-between">
             <Link to="/foods">
               {" "}
-              <li>All-foods</li>{" "}
+              <li     className=" text-pink-500   ">All-foods</li>{" "}
             </Link>
-            <li> Call us</li>
+            <li   className="text-blue-600/100 dark:text-sky-400/100"> Call us</li>
           </ul>
         </div>
 
@@ -35,13 +35,13 @@ export default function Navbar({ setdata }: user_input_props) {
           <input
             type="text"
             placeholder="Search..."
-            className="w-full px-4 py-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 "
+            className="w-full px-4 py-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500    hover:border-blue-300 text-amber-300"
             onChange={(e) => setvalue(e.target.value)}
           />
           <Link to="/foods">
             {" "}
             <button
-              className="  px-4 py-2 border rounded-4xl  text-white bg-blue-500 rounded-r-lg hover:bg-blue-600 "
+              className="  px-4 py-2 border rounded-4xl  text-white bg-blue-700 rounded-r-lg hover:bg-blue-600 "
               onClick={handleinput}
             >
               Search

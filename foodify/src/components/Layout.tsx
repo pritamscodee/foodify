@@ -6,11 +6,11 @@ function Layout() {
   const [data, setdata] = useState<string>("");
 
   return (
-    <>
+    <div className="min-h-screen bg-gray-800">
       <Navbar setdata={setdata} />
 
       <Outlet context={{ data, setdata }} />
-    </>
+    </div>
   );
 }
 
