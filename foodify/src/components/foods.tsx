@@ -97,7 +97,7 @@ function Foods({ data }: user_input_props) {
         ))
       ) : (
         <div className="text-5xl">
-          Please 🍽️ Start typing to search for meals...
+     
         </div>
       )}
     </div>
