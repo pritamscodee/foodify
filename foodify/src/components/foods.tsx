@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useOutletContext } from "react-router";
 import prices from "@/fakedata/pricelist";
 import { rating } from "@/fakedata/review";
 import { Spinner } from "@/components/ui/spinner";
@@ -12,8 +13,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
 import { FoodBy_First_Name, FoodsByName } from "../Api/api";
+
 type user_input_props = {
   data: string;
 };
@@ -24,15 +25,20 @@ type meals = {
   category: string;
   area: string;
   price: number;
-  rating:number
+  rating: number;
+};
+
+type ContextCart = {
+  cart: meals[];
+  setcart: React.Dispatch<React.SetStateAction<meals[]>>;
 };
 
 type loadingState = "success" | "loading" | "data not found" | null;
 
 function Foods({ data }: user_input_props) {
   const [getfoods, setfoods] = useState<meals[]>([]);
-
   const [loading, setloading] = useState<loadingState>(null);
+  const { cart, setcart } = useOutletContext<ContextCart>();
 
   useEffect(() => {
     async function fetchingmeals() {
@@ -51,8 +57,8 @@ function Foods({ data }: user_input_props) {
           img: meal.strMealThumb,
           category: meal.strCategory,
           area: meal.strArea,
-          price: prices[i % prices.length].price, // i is index  0 1 2 .... mapped datas and i%prices.len gives 0 1 2
-          rating: rating[i % rating.length].review
+          price: prices[i % prices.length].price,
+          rating: rating[i % rating.length].review,
         })) ?? [];
 
       setfoods(mapped);
@@ -61,6 +67,41 @@ function Foods({ data }: user_input_props) {
 
     fetchingmeals();
   }, [data]);
+
+  function handleCart(cartitems: meals) {  // passing object and revoke duplicate entry
+
+
+    if (cart) {
+
+      const filterCarts = cart.some((e: any) =>  //returning true if items already exixt in cart state::
+        e.name === cartitems.name
+
+      )
+      if (!filterCarts) {
+
+        setcart((prev)=>[...prev,cartitems])
+      }
+
+
+
+
+    } else {
+
+
+      setcart(
+
+
+
+        (prev: any) => [...prev, cartitems])
+    }
+
+
+
+
+
+
+
+  }
 
   return (
     <div className="m-29 flex justify-center flex-wrap">
@@ -77,22 +118,25 @@ function Foods({ data }: user_input_props) {
         getfoods.map((e, idx) => (
           <Card
             key={idx}
-            className="relative mx-auto w-full max-w-sm pt-0   hover:shadow-xl transition-all duration-300 border bg-lime-500"
+            className="relative mx-auto w-full max-w-sm pt-0 hover:shadow-xl transition-all duration-300 border bg-fuchsia-950"
           >
-            <img
-              src={e.img}
-              alt="Event cover"
-              className="w-full h-full object-cover"
-            />
+            <img src={e.img} alt="Event cover" className="w-full h-full object-cover" />
             <CardHeader>
               <CardAction>
                 <Badge variant="secondary">Featured</Badge>
               </CardAction>
-              <CardTitle> ₹ {e.price}</CardTitle>
-              <CardDescription className="bg-amber-200"> rating : {e.rating}</CardDescription>
-            </CardHeader> 
+              <CardTitle>₹ {e.price}</CardTitle>
+              <CardDescription className="bg-amber-200">
+                rating : {e.rating}
+              </CardDescription>
+            </CardHeader>
             <CardFooter>
-              <Button className="w-full">{e.area}</Button>
+              <Button
+                className="w-50 bg-amber-700 hover:bg-blue-950 hover:text-shadow-amber-950 transition"
+                onClick={() => handleCart(e)}
+              >
+                Add-to-Cart
+              </Button>
             </CardFooter>
           </Card>
         ))
@@ -104,3 +148,31 @@ function Foods({ data }: user_input_props) {
 }
 
 export default Foods;
+
+export function Cartitems() {
+  const { cart } = useOutletContext<ContextCart>();
+  console.log(cart)
+
+  return (
+    <>
+
+      <div className="flex flex-wrap gap-4 mt-15 ml-4">
+        {cart && cart.map((item, idx) => (
+          <div
+            key={idx}
+            className="p-4 bg-amber-700 border border-gray-200 hover:-translate-y-1 transition duration-300 rounded-lg shadow shadow-black/10 max-w-80"
+          >
+            <img
+              className="rounded-md max-h-40 w-full object-cover"
+              src={item.img}
+              alt={item.name}
+            />
+            <p className="text-gray-900 text-xl font-semibold ml-2 mt-4">
+              {item.name}
+            </p>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
