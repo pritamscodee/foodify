@@ -5,13 +5,14 @@ import { useOutletContext } from "react-router";
 import prices from "@/fakedata/pricelist";
 import { rating } from "@/fakedata/review";
 import { Spinner } from "@/components/ui/spinner";
+import { Skeleton } from "@/components/ui/skeleton"
 import {
   Card,
   CardAction,
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
+  CardTitle,CardContent
 } from "@/components/ui/card";
 import { FoodBy_First_Name, FoodsByName } from "../Api/api";
 
@@ -105,40 +106,72 @@ function Foods({ data }: user_input_props) {
 
   return (
     <div className="m-29 flex justify-center flex-wrap">
+
+
+
+
+
+
+
+
+
       {loading === "loading" && (
-        <div className="flex flex-col items-center gap-4">
-          <Button disabled size="sm">
-            <Spinner data-icon="inline-start" />
-            Loading... Your request ⏳⏳
-          </Button>
-        </div>
+          <Card className="w-full max-w-xs  bg-gray-600  animate-pulse animate-caret-blink">
+      <CardHeader>
+        <Skeleton className="h-4 w-2/3" />
+        <Skeleton className="h-4 w-1/2" />
+      </CardHeader>
+      <CardContent>
+        <Skeleton className="aspect-video w-full" />
+      </CardContent>
+    </Card>
       )}
 
       {getfoods && getfoods.length > 0 ? (
         getfoods.map((e, idx) => (
-          <Card
-            key={idx}
-            className="relative mx-auto w-full max-w-sm pt-0 hover:shadow-xl transition-all duration-300 border bg-fuchsia-950"
-          >
-            <img src={e.img} alt="Event cover" className="w-full h-full object-cover" />
-            <CardHeader>
-              <CardAction>
-                <Badge variant="secondary">Featured</Badge>
-              </CardAction>
-              <CardTitle>₹ {e.price}</CardTitle>
-              <CardDescription className="bg-amber-200">
-                rating : {e.rating}
-              </CardDescription>
-            </CardHeader>
-            <CardFooter>
-              <Button
-                className="w-50 bg-amber-700 hover:bg-blue-950 hover:text-shadow-amber-950 transition"
-                onClick={() => handleCart(e)}
-              >
-                Add-to-Cart
-              </Button>
-            </CardFooter>
-          </Card>
+        <Card
+  key={idx}
+  className="group relative mx-auto w-full max-w-sm overflow-hidden rounded-2xl border border-white/10 bg-zinc-900 text-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-white/20"
+>
+  {/* Image */}
+  <div className="relative">
+    <img
+      src={e.img}
+      alt="Event cover"
+      className="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+    />
+
+    {/* dark gradient overlay */}
+    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+    {/* Badge */}
+    <Badge className="absolute top-3 right-3 bg-white/10 text-white backdrop-blur-md border border-white/20">
+      Featured
+    </Badge>
+
+  
+    <h2 className="absolute bottom-3 left-3 text-xl font-bold tracking-wide">
+      ₹ {e.price}
+    </h2>
+  </div>
+
+ 
+  <CardHeader className="pb-2">
+    <CardDescription className="text-gray-400">
+      ⭐ Rating: {e.rating}
+    </CardDescription>
+  </CardHeader>
+
+ 
+  <CardFooter>
+    <Button
+      className="w-full rounded-xl bg-white text-black font-semibold transition-all duration-300 hover:bg-gray-200 hover:scale-[1.03]"
+      onClick={() => handleCart(e)}
+    >
+      Add to Cart
+    </Button>
+  </CardFooter>
+</Card>
         ))
       ) : (
         <div className="text-5xl"></div>
@@ -156,23 +189,52 @@ export function Cartitems() {
   return (
     <>
 
-      <div className="flex flex-wrap gap-4 mt-15 ml-4">
-        {cart && cart.map((item, idx) => (
-          <div
-            key={idx}
-            className="p-4 bg-amber-700 border border-gray-200 hover:-translate-y-1 transition duration-300 rounded-lg shadow shadow-black/10 max-w-80"
-          >
-            <img
-              className="rounded-md max-h-40 w-full object-cover"
-              src={item.img}
-              alt={item.name}
-            />
-            <p className="text-gray-900 text-xl font-semibold ml-2 mt-4">
-              {item.name}
-            </p>
+    <div className="flex flex-wrap gap-6 mt-14 ml-4">
+  {cart &&
+    cart.map((item, idx) => (
+      <div
+        key={idx}
+        className="group flex w-full max-w-xl items-center gap-4 rounded-2xl border border-white/10 bg-zinc-900 p-4 text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+      >
+      
+        <img
+          className="h-28 w-28 rounded-xl object-cover"
+          src={item.img}
+          alt={item.name}
+        />
+
+       
+        <div className="flex flex-1 flex-col">
+          <h2 className="text-lg font-semibold tracking-wide">
+            {item.name}
+          </h2>
+
+          <p className="text-sm text-gray-400 mt-1">
+            Rating: ⭐ {item.rating ?? "4.5"}
+          </p>
+
+        
+          <div className="mt-3 flex items-center justify-between">
+            <span className="text-xl font-bold text-green-400">
+              ₹ {item.price ?? 499}
+            </span>
+
+            
+            <div className="flex items-center gap-2 rounded-lg bg-black/40 px-3 py-1">
+              <button className="text-lg font-bold hover:text-red-400">−</button>
+              <span className="text-sm">1</span>
+              <button className="text-lg font-bold hover:text-green-400">+</button>
+            </div>
           </div>
-        ))}
+        </div>
+
+       
+        <button className="text-sm text-red-400 opacity-0 transition group-hover:opacity-100 hover:text-red-600">
+          Remove
+        </button>
       </div>
+    ))}
+</div>
     </>
   );
 }
