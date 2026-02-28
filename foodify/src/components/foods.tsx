@@ -4,15 +4,12 @@ import { Button } from "@/components/ui/button";
 import { useOutletContext } from "react-router";
 import prices from "@/fakedata/pricelist";
 import { rating } from "@/fakedata/review";
-import { Spinner } from "@/components/ui/spinner";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   Card,
-  CardAction,
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
   CardContent,
 } from "@/components/ui/card";
 import { FoodBy_First_Name, FoodsByName } from "../Api/api";
