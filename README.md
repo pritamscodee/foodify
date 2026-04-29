@@ -83,3 +83,20 @@ export default api;
 
 ## 🚀 Deployment (Netlify)
 
+----------------------------------------
+----------------------
+---------
+----
+--
+-
+ &&wakatime dashboard&&
+
+ 
+ <img width="1662" height="820" alt="image" src="https://github.com/user-attachments/assets/bd14a323-37c1-4b3c-96bc-90cec3685ef5" />
+
+
+
+
+<img width="1647" height="885" alt="image" src="https://github.com/user-attachments/assets/fea5d8d7-adff-4d14-9d36-c548e4aaacf4" />
+
+ 
