@@ -1,4 +1,4 @@
-# 🌐 Frontend - Foodify (or Your Project Name)
+# 🌐 Frontend - Foodify 
 
 A modern, responsive frontend built with **React**, **TypeScript**, and **TailwindCSS**, featuring clean UI components from **shadcn/ui**, client-side routing with **React Router**, and API communication via **Axios**.
 
